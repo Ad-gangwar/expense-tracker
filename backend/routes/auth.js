@@ -33,42 +33,26 @@ router.post('/register', async (req, res) => {
 });
 
 // Login endpoint
-router.post('/login', [
-    body('email').isEmail(),
-    body('password').isLength({ min: 5 }).withMessage('should contain min 5 char'),
-], async (req, res) => {
+router.post('/login', async (req, res) => {
+    const { email, password } = req.body;
 
-    const result = validationResult(req);
+    const user = await User.findOne({ email: email });
 
-    if (!result.isEmpty()) {
-        return res.status(400).json({ err: result.array() });
+    if (!user) {
+        return res.status(403).json({ err: 'Enter valid Credentials' });
     }
 
-    try {
-        let email = req.body.email;
-        let userData = await User.findOne({ email });
+    const isValidPass = await bcrypt.compare(password, user.password);
 
-        if (!userData) {
-            return res.status(400).json({ err: 'Email not found! Enter correct email' });
-        }
-        const isValidPass = await bcrypt.compare(req.body.password, userData.password);
-
-        if (!isValidPass) {
-            return res.status(400).json({ err: 'Enter valid Credentials' });
-        }
-
-        const jwtPayload = {
-            id: userData._id,
-        };
-        const token = await getToken(userData.email, jwtPayload);
-
-        const userToReturn = { ...userData.toJSON()};
-        delete userToReturn.password;
-        return res.status(200).json({success: true, data: userToReturn, token: token});
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ err: 'Internal server error' });
+    if (!isValidPass) {
+        return res.status(403).json({ err: 'Enter valid Credentials' });
     }
+
+    const token = await getToken(user.email, user);
+    const userToReturn = { ...user.toJSON(), token };
+    delete userToReturn.password;
+
+    return res.status(200).json({success: true, data: userToReturn, token: token});
 });
 
 module.exports=router;

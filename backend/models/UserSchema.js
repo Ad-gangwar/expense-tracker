@@ -11,7 +11,11 @@ const UserSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Expense'
     }
-  ]
+  ],
+  income: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Income"
+  }
 });
 
 module.exports = mongoose.model('User', UserSchema);

@@ -1,16 +1,16 @@
 const mongoose = require('mongoose');
-const User= require('./UserSchema');
 
-const ExpenseSchema = new mongoose.Schema({
+
+const IncomeSchema = new mongoose.Schema({
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        Ref: "User"
+    },
     title: {
         type: String,
         required: true,
         trim: true,
         maxLength: 50
-    },
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        Ref: "User"
     },
     amount: {
         type: Number,
@@ -20,7 +20,7 @@ const ExpenseSchema = new mongoose.Schema({
     },
     type: {
         type: String,
-        default:"expense"
+        default:"income"
     },
     date: {
         type: Date,
@@ -40,4 +40,4 @@ const ExpenseSchema = new mongoose.Schema({
     },
 }, {timestamps: true})
 
-module.exports = mongoose.model('Expense', ExpenseSchema);
+module.exports = mongoose.model('Income', IncomeSchema)

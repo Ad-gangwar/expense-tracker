@@ -1,14 +1,13 @@
-const Expense = require("../models/ExpenseSchema")
+const Income= require("../models/IncomeSchema")
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 
-
- router.post("/add-expense", passport.authenticate("jwt", {session: false}), async (req, res) => {
-    const user = req.user._id;
+router.post("/add-income", passport.authenticate("jwt", {session: false}), async (req, res) => {
     const {title, amount, category, description, date}  = req.body
+    const user = req.user._id;
 
-    const expense = Expense({
+    const income = Income({
         title,
         user,
         amount,
@@ -25,35 +24,34 @@ const passport = require('passport');
         if(amount <= 0 || !amount === 'number'){
             return res.status(400).json({message: 'Amount must be a positive number!'})
         }
-        await expense.save()
-        res.status(200).json({message: 'Expense Added'})
+        await income.save()
+        res.status(200).json({message: 'Income Added'})
     } catch (error) {
         res.status(500).json({message: 'Server Error'})
     }
-
-    console.log(expense)
+    console.log(income)
 });
 
-router.get("/get-expenses", passport.authenticate("jwt", {session: false}), async (req, res) =>{
-    const user = req.user._id;
+router.get("/get-incomes", passport.authenticate("jwt", {session: false}), async (req, res) =>{
+    const user= req.user._id;
     try {
-        const expenses = await Expense.find({user: user}).sort({createdAt: -1})
-        res.status(200).json({data: expenses})
+        const incomes = await Income.find({user: user}).sort({createdAt: -1})
+        res.status(200).json({data: incomes})
     } catch (error) {
         res.status(500).json({message: 'Server Error'})
     }
-});
+})
 
-router.post("/delete-expense/:id", passport.authenticate("jwt", {session: false}),  async (req, res) =>{
+router.post("/delete-income/:id", passport.authenticate("jwt", {session: false}),  async (req, res) =>{
     const {id} = req.params;
-    console.log(id);
-    Expense.findByIdAndDelete(id)
-        .then((expense) =>{
-            res.status(200).json({message: 'Expense Deleted'})
+    Income.findByIdAndDelete(id)
+        .then((income) =>{
+            res.status(200).json({message: 'Income Deleted'})
         })
         .catch((err) =>{
             res.status(500).json({message: 'Server Error'})
-    })
-});
+        })
+})
+
 
 module.exports = router;

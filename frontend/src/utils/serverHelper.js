@@ -30,7 +30,7 @@ export const makeAuthPostReq = async (route, body) => {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("legalToken")}`,
+            Authorization: `Bearer ${localStorage.getItem("expToken")}`,
         },
         body: JSON.stringify(body),
     });
@@ -45,7 +45,7 @@ export const makeAuthGetReq = async (route) => {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("legalToken")}`,
+            Authorization: `Bearer ${localStorage.getItem("expToken")}`,
         },
     });
 
