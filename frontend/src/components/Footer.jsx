@@ -2,13 +2,9 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 // import logo from '../../assets/Images/logo.png'
 import {  RiLinkedinFill } from 'react-icons/ri'
-import { AiFillYoutube, AiFillGithub, AiOutlineInstagram } from 'react-icons/ai'
+import { AiFillGithub, AiOutlineInstagram } from 'react-icons/ai'
 
 const socialLinks = [
-  {
-    path: "gj",
-    icon: <AiFillYoutube className='group-hover:text-white w-4 h-5' />
-  },
   {
     path: "gj",
     icon: <AiFillGithub className='group-hover:text-white w-4 h-5' />
@@ -45,7 +41,7 @@ const quickLinks01= [
 const quickLinks02= [
   {
     path: "/",
-    display: "Take Classes"
+    display: "Track Expenses"
   },
   {
     path: "/",

@@ -97,7 +97,7 @@ const LoginPage = () => {
               {loading ? <HashLoader size={35} color='white' /> : 'Login'}
             </button>
           </form>
-          <div className="text-gray-600 mt-6">Forgot password?</div>
+          <div className="text-gray-600 mt-6 text-center">Not signed up? <span className="text-teal-700 font-semibold"><Link to="/signup">Sign Up</Link></span></div>
         </div>
       </div>
     </div>

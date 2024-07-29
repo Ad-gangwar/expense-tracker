@@ -55,6 +55,17 @@ router.post('/login', async (req, res) => {
     return res.status(200).json({success: true, data: userToReturn, token: token});
 });
 
+// Route to get all users
+router.get('/users', async (req, res) => {
+    try {
+        const users = await User.find({});
+        return res.status(200).json({ data: users });
+    } catch (error) {
+        console.error("Error fetching users:", error);
+        return res.status(500).json({ message: "Internal server error" });
+    }
+});
+
 module.exports=router;
 
 

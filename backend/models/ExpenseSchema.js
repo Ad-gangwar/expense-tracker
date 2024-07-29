@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const User= require('./UserSchema');
+const User = require('./UserSchema');
 
 const ExpenseSchema = new mongoose.Schema({
     title: {
@@ -10,17 +10,25 @@ const ExpenseSchema = new mongoose.Schema({
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        Ref: "User"
+        ref: "User"
     },
+    partners: [{
+        user: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+        },
+        share: {
+            type: String,
+        }
+    }],
     amount: {
         type: Number,
         required: true,
-        maxLength: 20,
         trim: true
     },
     type: {
         type: String,
-        default:"expense"
+        default: "expense"
     },
     date: {
         type: Date,
@@ -35,9 +43,9 @@ const ExpenseSchema = new mongoose.Schema({
     description: {
         type: String,
         required: true,
-        maxLength: 20,
+        maxLength: 200, // Increased maxLength for description
         trim: true
-    },
-}, {timestamps: true})
+    }
+}, { timestamps: true });
 
 module.exports = mongoose.model('Expense', ExpenseSchema);

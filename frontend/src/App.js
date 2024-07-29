@@ -27,7 +27,7 @@ export default function App() {
       element: <Contact />,
     },
     {
-      path: "/register-student",
+      path: "/signup",
       element: <SignupPage />,
     },
     {

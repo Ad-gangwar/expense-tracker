@@ -45,7 +45,7 @@ const SignupPage = () => {
           </Carousel>
         </div>
 
-        <div className="w-3/5 p-6 px-8 mt-16">
+        <div className="w-3/5 p-6 px-8 mt-12 py-5">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">
             We are <span className="text-teal-600">ExpenseEase</span>
           </h2>
@@ -53,7 +53,7 @@ const SignupPage = () => {
             <span className="text-2xl">👋</span> Sign Up to get started.
           </p>
           <form>
-            <div className="mb-8">
+            <div className="mb-5">
               <label className="block text-gray-600 mb-1" htmlFor="name">
                 Full Name
               </label>
@@ -66,7 +66,7 @@ const SignupPage = () => {
                 onChange={(e) => setName(e.target.value)}
               />
             </div>
-            <div className="mb-8">
+            <div className="mb-5">
               <label className="block text-gray-600 mb-1" htmlFor="email">
                 Email
               </label>
@@ -79,7 +79,7 @@ const SignupPage = () => {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
-            <div className="mb-12">
+            <div className="mb-10">
               <label className="block text-gray-600 mb-1" htmlFor="password">
                 Password
               </label>
@@ -99,6 +99,7 @@ const SignupPage = () => {
               {loading ? <HashLoader size={35} color='white' /> : 'Register'}
             </button>
           </form>
+          <div className="text-center mt-2">Already registered? <span><Link to="/login" className="text-teal-700">Login</Link></span></div>
         </div>
       </div>
     </div>

@@ -8,7 +8,7 @@ function Expenses() {
 
     useEffect(() => {
         getExpenses();
-    }, [getExpenses]);
+    }, []);
 
     return (
         <div className="flex flex-col p-10 overflow-auto">
@@ -22,8 +22,8 @@ function Expenses() {
                     <ExpenseForm />
                 </div>
                 <div className="w-full lg:w-1/2">
-                    {expenses.map((income) => {
-                        const { _id, title, amount, date, category, description, type } = income;
+                    {expenses.map((expense) => {
+                        const { _id, title, amount, date, category, description, type , partners} = expense;
                         return (
                             <IncomeItem
                                 key={_id}
@@ -31,6 +31,7 @@ function Expenses() {
                                 title={title}
                                 description={description}
                                 amount={amount}
+                                partners = {partners}
                                 date={date}
                                 type={type}
                                 category={category}
